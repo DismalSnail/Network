@@ -17,11 +17,29 @@ for item in csvreader:
         middlelist.append(int(item[2]))
         edgeList.append(tuple(middlelist))
 
-for item in edgeList:
-    print(item)
+csvFile.close()
+
+# for item in edgeList:
+#     print(item)
 
 G = nx.Graph()
 G.add_weighted_edges_from(edgeList)
 print(G.number_of_edges())
+print(G.number_of_nodes())
+nodeList = list(G.nodes())
 
-csvFile.close()
+edgeIndexList = []
+
+for item in edgeList:
+    edgeIndexList.append(tuple([nodeList.index(item[0]), nodeList.index(item[1]), item[2]]))
+
+# for item in edgeIndexList:
+#     print(item)
+
+H=nx.Graph()
+H.add_weighted_edges_from(edgeIndexList)
+Salience = sa.salience(H, 'weight')
+
+print(Salience)
+
+

@@ -65,7 +65,7 @@ def _SPT(G, r, weight='weight'):
     # each path is a dictionary with key: r and value:the list of nodes in the path
     
     # Filling T based on the presence of a link in at least one of the shortest paths
-    for k, path in paths.iteritems(): 
+    for k, path in paths.items():
         for i in range(len(path)-1):
             T[path[i]][path[i+1]]=1 # updating the matrix T because there is a link
     return T
