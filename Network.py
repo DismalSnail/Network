@@ -36,10 +36,8 @@ for item in edgeList:
 # for item in edgeIndexList:
 #     print(item)
 
-H=nx.Graph()
+H = nx.Graph()
 H.add_weighted_edges_from(edgeIndexList)
 Salience = sa.salience(H, 'weight')
 
 print(Salience)
-
-
