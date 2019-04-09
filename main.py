@@ -1,7 +1,7 @@
 import csv
 
 csvFile = open("CSV/trainnew.csv", "r")
-csvSaveFile=open("CSV/trainweight.csv","w+",newline="")
+csvSaveFile=open("CSV/trainweight1.csv","w+",newline="")
 csvreader = csv.reader(csvFile)
 csvwriter=csv.writer(csvSaveFile)
 flag = False
@@ -18,7 +18,7 @@ for item in csvreader:
         middleList.append(int(item[1]))
         middleList.append(1)
         for edge in Graph:
-            if middleList[0] == edge[0] and middleList[1] == edge[1]:
+            if (middleList[0] == edge[0] and middleList[1] == edge[1])or (middleList[0] == edge[1] and middleList[1] == edge[0]):
                 edge[2] = edge[2] + middleList[2]
                 flag = True
                 break
