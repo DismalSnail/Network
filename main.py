@@ -1,3 +1,5 @@
+# 将节点间的边压缩为一条，条数变为权重
+
 import csv
 
 csvFile = open("CSV/trainnew.csv", "r")

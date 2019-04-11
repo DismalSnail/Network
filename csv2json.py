@@ -35,8 +35,8 @@
 import csv
 import json
 
-csvfile=open('trainnew.csv','r')
-sonfile=open('routes.txt','w+')
+csvfile=open('CSV/trainweight1.csv','r')
+sonfile=open('TXT/routes.txt','w+')
 sonfile.write('[')
 str=[]
 str2=[-1]
@@ -49,7 +49,7 @@ for row in csvfile:
     else:
         str=row.strip('\n')
         str=str.split(',')
-        sonfile.write('['+str[0]+','+str[1]+'],')
+        sonfile.write('['+str[0]+','+str[1]+','+str[2]+'],')
 
 sonfile.write(']')
 
