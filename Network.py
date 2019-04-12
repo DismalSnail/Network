@@ -1,8 +1,9 @@
 import networkx as nx
 import salience as sa
+import numpy as np
 import csv
 
-csvFile = open("CSV/trainweight.csv", "r")  # 读取文件
+csvFile = open("CSV/trainweight1.csv", "r")  # 读取文件
 csvreader = csv.reader(csvFile)
 
 edgeList = []  # 存储边的list
@@ -24,8 +25,7 @@ csvFile.close()
 
 G = nx.Graph()
 G.add_weighted_edges_from(edgeList)
-print(G.number_of_edges())
-print(G.number_of_nodes())
+
 nodeList = list(G.nodes())
 
 edgeIndexList = []
@@ -40,15 +40,14 @@ H = nx.Graph()
 H.add_weighted_edges_from(edgeIndexList)
 Salience = sa.salience(H, 'weight')
 
-print(type(Salience))
+[rows, cols] = Salience.shape
 
-# [rows, cols] = Salience.shape
-#
-# edgeList = []
-#
-# for i in range(rows):
-#     for j in range(cols):
-#         edgeList.append(tuple([nodeList[i], nodeList[j], Salience[i][j]]))
-#
-# G = nx.Graph()
-#G.add_weighted_edges_from(edgeList)
+edgeList = []
+
+for i in range(rows):
+    for j in range(cols):
+        edgeList.append(tuple([nodeList[i], nodeList[j], Salience[i][j]]))
+
+G = nx.Graph()
+G.add_weighted_edges_from(edgeList)
+
