@@ -35,8 +35,8 @@
 import csv
 import json
 
-csvfile=open('CSV/trainweight1.csv','r')
-sonfile=open('TXT/routes.txt','w+')
+csvfile=open('CSV/train_SHH.csv','r')
+sonfile=open('TXT/SSH_routes.txt','w+')
 sonfile.write('[')
 str=[]
 str2=[-1]

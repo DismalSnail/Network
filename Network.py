@@ -1,9 +1,8 @@
 import networkx as nx
 import salience as sa
-import numpy as np
 import csv
 
-csvFile = open("CSV/trainweight1.csv", "r")  # 读取文件
+csvFile = open("CSV/trainweight.csv", "r")  # 读取文件
 csvreader = csv.reader(csvFile)
 
 edgeList = []  # 存储边的list
@@ -50,4 +49,17 @@ for i in range(rows):
 
 G = nx.Graph()
 G.add_weighted_edges_from(edgeList)
+edgeList.clear()
+for u, v, d in G.edges(data='weight'):
+    edgeList.append([u, v, d])
 
+csvSaveFile = open("CSV/train_SHH.csv", "w+", newline="")
+csvwriter = csv.writer(csvSaveFile)
+
+csvwriter.writerow(["source", "target", "salience"])
+
+for item in edgeList:
+    if item[2] > 0.0:
+        csvwriter.writerow(item)
+
+csvSaveFile.close()
