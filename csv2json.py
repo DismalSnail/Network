@@ -9,7 +9,7 @@ a = [-1] * 418
 flag = 0
 
 # 输入将数据点写入文本
-with open("CSV/LocationList.csv", "r") as NodeCsvFile:
+with open("Csv/LocationList.csv", "r") as NodeCsvFile:
     for row in NodeCsvFile:
         if flag == 0:
             flag = 1
@@ -31,7 +31,7 @@ JsonFile.write("],\"routes\":[")
 
 # 将路线写入文本
 count = 0
-with open("CSV/TrainWeight.csv", "r") as RouteCsvFile:
+with open("Csv/TrainWeight.csv", "r") as RouteCsvFile:
     RouteCsvFile.readline()
     row = RouteCsvFile.readline()
     while row:

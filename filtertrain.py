@@ -4,9 +4,9 @@
 """
 import csv
 
-csvFile=open("CSV/LocationList.csv","r")
-csvRe=open("CSV/OnlyTrain.csv","r")
-csvSv=open("CSV/FilterTrain.csv","w",newline='')
+csvFile=open("Csv/LocationList.csv","r")
+csvRe=open("Csv/OnlyTrain.csv","r")
+csvSv=open("Csv/FilterTrain.csv","w",newline='')
 reader=csv.reader(csvFile)
 reade=csv.reader(csvRe)
 writer=csv.writer(csvSv)

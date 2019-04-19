@@ -6,7 +6,7 @@ import networkx as nx
 import salience as sa
 import csv
 
-csvFile = open("CSV/TrainWeight.csv", "r")  # 读取文件
+csvFile = open("Csv/TrainWeight.csv", "r")  # 读取文件
 csvreader = csv.reader(csvFile)
 
 edgeList = []  # 存储边的list
@@ -54,7 +54,7 @@ edgeList.clear()
 for u, v, d in G.edges(data='weight'):
     edgeList.append([u, v, d])
 
-csvSaveFile = open("CSV/TrainSHH.csv", "w", newline="")
+csvSaveFile = open("Csv/TrainSHH.csv", "w", newline="")
 csvwriter = csv.writer(csvSaveFile)
 
 csvwriter.writerow(["source", "target", "salience"])

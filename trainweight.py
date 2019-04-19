@@ -2,8 +2,8 @@
 
 import csv
 
-csvFile = open("CSV/FilterTrain.csv", "r")
-csvSaveFile=open("CSV/TrainWeight.csv","w",newline="")
+csvFile = open("Csv/FilterTrain.csv", "r")
+csvSaveFile=open("Csv/TrainWeight.csv","w",newline="")
 csvreader = csv.reader(csvFile)
 csvwriter=csv.writer(csvSaveFile)
 flag = False
