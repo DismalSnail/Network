@@ -1,57 +1,54 @@
-# 站点数据整理
-# import csv
-# import json
-#
-# csvfile=open('locationList.csv','r')
-# sonfile=open('location.txt','w+')
-#
-# str=[]
-# str2=[-1]
-# a=[-1]*418
-# flag=0
-# for row in csvfile:
-#     if flag==0:
-#         flag=1;
-#         continue
-#     else:
-#         str=row.strip('\n')
-#         str=str.split(',')
-#         str2[0]=int(str[0])
-#         a[str2[0]]=[str[0],str[1],str[2]]
-#
-# for i in range(len(a)):
-#     if a[i]==-1:
-#         a[i]=['-1','-1','-1']
-#
-# sonfile.write('[')
-#
-# for row in a:
-#     sonfile.write('[' + row[0]+','+row[1]+','+row[2]+']'+',')
-#
-# csvfile.close()
-# sonfile.close()
 
-# 数据路线整理
-import csv
-import json
 
-csvfile=open('CSV/train_SHH.csv','r')
-sonfile=open('TXT/SSH_routes.txt','w+')
-sonfile.write('[')
-str=[]
-str2=[-1]
-a=[]
-flag=0
-for row in csvfile:
-    if flag==0:
-        flag=1
-        continue
+"""
+    将站点数据与路线数据整合转化为json数据
+"""
+
+JsonFile = open("Json/FilterTrainData.json", "w")
+JsonFile.write("{\"station\":[")
+
+a = [-1] * 418
+flag = 0
+
+# 输入将数据点写入文本
+with open("CSV/LocationList.csv", "r") as NodeCsvFile:
+    for row in NodeCsvFile:
+        if flag == 0:
+            flag = 1
+            continue
+        else:
+            str = row.strip('\n')
+            str = str.split(',')
+            a[int(str[0])] = [str[0], str[1], str[2]]
+
+for i in range(len(a)):
+    if a[i] == -1:
+        a[i] = ['-1', '-1', '-1']
+    if i == len(a)-1:
+        JsonFile.write('[' + a[i][0] + ',' + a[i][1] + ',' + a[i][2] + ']')
     else:
-        str=row.strip('\n')
-        str=str.split(',')
-        sonfile.write('['+str[0]+','+str[1]+','+str[2]+'],')
+        JsonFile.write('[' + a[i][0] + ',' + a[i][1] + ',' + a[i][2] + '],')
 
-sonfile.write(']')
+JsonFile.write("],\"routes\":[")
 
-csvfile.close()
-sonfile.close()
+# 将路线写入文本
+count=0
+with open("CSV/FilterTrain.csv", "r") as RouteCsvFile:
+    RouteCsvFile.readline()
+    row = RouteCsvFile.readline()
+    while row:
+        NextLine = RouteCsvFile.readline()
+        if NextLine != "":
+            str = row.strip('\n')
+            str = str.split(',')
+            JsonFile.write('[' + str[0] + ',' + str[1] + '],')
+            count = count + 1
+        else:
+            str = row.strip('\n')
+            str = str.split(',')
+            JsonFile.write('[' + str[0] + ',' + str[1] + ']')
+            count = count + 1
+        row = NextLine
+
+JsonFile.write("]}")
+JsonFile.close()
