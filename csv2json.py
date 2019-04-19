@@ -1,10 +1,8 @@
-
-
 """
     将站点数据与路线数据整合转化为json数据
 """
 
-JsonFile = open("Json/FilterTrainData.json", "w")
+JsonFile = open("Json/TrainWeightData.json", "w")
 JsonFile.write("{\"station\":[")
 
 a = [-1] * 418
@@ -24,7 +22,7 @@ with open("CSV/LocationList.csv", "r") as NodeCsvFile:
 for i in range(len(a)):
     if a[i] == -1:
         a[i] = ['-1', '-1', '-1']
-    if i == len(a)-1:
+    if i == len(a) - 1:
         JsonFile.write('[' + a[i][0] + ',' + a[i][1] + ',' + a[i][2] + ']')
     else:
         JsonFile.write('[' + a[i][0] + ',' + a[i][1] + ',' + a[i][2] + '],')
@@ -32,8 +30,8 @@ for i in range(len(a)):
 JsonFile.write("],\"routes\":[")
 
 # 将路线写入文本
-count=0
-with open("CSV/FilterTrain.csv", "r") as RouteCsvFile:
+count = 0
+with open("CSV/TrainWeight.csv", "r") as RouteCsvFile:
     RouteCsvFile.readline()
     row = RouteCsvFile.readline()
     while row:
