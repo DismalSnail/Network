@@ -26,7 +26,7 @@ def haversine(latlon1, latlon2):
     return distance
 
 
-def db_scan():
+def db_scan(min_pts=3, eps=650):
     datap = []
     f = open("Csv/LocationList.csv", 'r')
     reader = csv.reader(f)
@@ -38,15 +38,13 @@ def db_scan():
     num_data = datap
     data_s = [[elem[1], elem[2]] for elem in datap]
     data = np.array(data_s)
-    MinPts = 3
-    eps = 650
 
-    db = DBSCAN(eps=eps, min_samples=MinPts, metric=haversine).fit(data)
+    db = DBSCAN(eps=eps, min_samples=min_pts, metric=haversine).fit(data)
     core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
     core_samples_mask[db.core_sample_indices_] = True
     labels = db.labels_
-    s=db.labels_[db.labels_==-1]
-    s=s.tolist()
+    s = db.labels_[db.labels_ == -1]
+    s = s.tolist()
     print(len(s))
     unique_labels = set(labels)
     label_list = []

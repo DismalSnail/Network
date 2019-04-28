@@ -19,12 +19,15 @@ def nodes_sort(percentage=0.5, cluster=False, sal=False):
     :return: 删减后节点列表
     """
     if sal:
-        pass
+        with open("Csv/TrainSHH.csv", "r") as reader:
+            reader.readline()
+            csv_reader = csv.reader(reader)
+            edges = [tuple([int(item[0]), int(item[1])]) for item in csv_reader]
     else:
         with open("Csv/TrainWeight.csv", "r") as reader:
             reader.readline()
             csv_reader = csv.reader(reader)
-            edges = [tuple([int(item[0]), int(item[1]), int(item[2])]) for item in csv_reader]
+            edges = [tuple([int(item[0]), int(item[1])]) for item in csv_reader]
 
     with open("Csv/LocationList.csv", "r") as reader:
         reader.readline()
@@ -32,7 +35,7 @@ def nodes_sort(percentage=0.5, cluster=False, sal=False):
         nodes = [int(item[0]) for item in csv_reader]
 
     g = nx.Graph()
-    g.add_weighted_edges_from(edges)
+    g.add_edges_from(edges)
     g.add_nodes_from(nodes)
     end_node = []
     if cluster:
@@ -44,15 +47,15 @@ def nodes_sort(percentage=0.5, cluster=False, sal=False):
             end_node_num = len(degree)
             degree.sort(key=take_second, reverse=True)
             if end_node_num == 1:
-                end_node = end_node + e_list
+                end_node = end_node + degree
                 continue
             while end_node_num / init_node_num > percentage:
                 degree.pop()
                 end_node_num = len(degree)
                 if end_node_num == 1:
                     break
-            end_node = end_node + e_list
-        return [elem[0] for elem in end_node + noise]
+            end_node = end_node + degree
+        return [elem[0] for elem in end_node] + noise
     else:
         degree = list(g.degree())
         init_node_num = len(degree)
@@ -66,5 +69,5 @@ def nodes_sort(percentage=0.5, cluster=False, sal=False):
 
 
 if __name__ == "__main__":
-    node = nodes_sort(0.5, cluster=True)
+    node = nodes_sort(0.5, cluster=True, sal=True)
     print(len(node))
