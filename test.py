@@ -1,6 +1,10 @@
-import networkx as nx
-
-G = nx.path_graph(4)
-centrality = nx.eigenvector_centrality(G)
-sorted((v, '{:0.2f}'.format(c)) for v, c in centrality.items())
-print("s")
+s = set()
+s.update([1, 2, 3, 4, 5, 6, 7, 8, 9])
+c=iter(s)
+print(c.__next__())
+print(c.__next__())
+print(c.__next__())
+print(c.__next__())
+print(c.__next__())
+print(c.__next__())
+print(c.__next__())
