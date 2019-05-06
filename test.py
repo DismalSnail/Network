@@ -1,10 +1,5 @@
-s = set()
-s.update([1, 2, 3, 4, 5, 6, 7, 8, 9])
-c=iter(s)
-print(c.__next__())
-print(c.__next__())
-print(c.__next__())
-print(c.__next__())
-print(c.__next__())
-print(c.__next__())
-print(c.__next__())
+s = []
+for i in range(4):
+    s.append([])
+
+print(3)
