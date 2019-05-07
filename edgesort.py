@@ -5,6 +5,8 @@ import csv
 import networkx as nx
 import dbscan as db
 
+__all__ = ['edges_sort']
+
 
 def take_third(elem):
     return elem[2].get('weight')
@@ -88,7 +90,7 @@ def edges_sort(percentage=0.5, cluster=False, sal=False):
                     for elem in e_list:
                         while end_node_num / init_node_num < percentage:
                             end_node_list[index].append(elem)
-
+                            end_node_num = len(set(end_node_list[index]))
             for elem in end_node_list:
                 end_node.update(elem)
             end_node.update(noise)
@@ -111,7 +113,7 @@ def edges_sort(percentage=0.5, cluster=False, sal=False):
 
 
 if __name__ == "__main__":
-    node = edges_sort(0.5, cluster=True, sal=False)
+    node = edges_sort(0.5, cluster=True, sal=True)
     print(len(node))
     for s in node:
         print(s)
