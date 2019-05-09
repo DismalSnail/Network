@@ -74,9 +74,3 @@ def nodes_sort(percentage=0.5, cluster=False, sal=False, ipt_is=0):
             end_node_num = len(degree)
         end_node = [elem[0] for elem in degree]
         return end_node
-
-
-if __name__ == "__main__":
-    node = nodes_sort(0.5, cluster=True, sal=False, ipt_is=1)
-    for elem in node:
-        print(elem)

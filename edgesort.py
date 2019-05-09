@@ -18,7 +18,6 @@ def edges_sort(percentage=0.5, cluster=False, sal=False):
     :param percentage: 保留节点百分比
     :param cluster: 是否聚类，默认不使用
     :param sal: 是否使用高显著性骨架，默认不使用
-    :param ipt_is: 边重要度计算方法 0：权重 1：边介数
     :return: 删减后节点列表
     """
     if sal:  # 骨架网络
