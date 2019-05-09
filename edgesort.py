@@ -109,10 +109,3 @@ def edges_sort(percentage=0.5, cluster=False, sal=False):
             except StopIteration:
                 break
         return end_node
-
-
-if __name__ == "__main__":
-    node = edges_sort(0.5, cluster=True, sal=True)
-    print(len(node))
-    for s in node:
-        print(s)
