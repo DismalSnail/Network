@@ -181,7 +181,7 @@ for i in range(len(node)):
     else:
         JsonFile.write(str(node[i]) + ",")
 # 骨干-非聚类-重要性
-JsonFile.write("],\"salience\":[")
+JsonFile.write("],\"SHH_salience\":[")
 node = es.edges_sort(0.5, cluster=False, sal=False)
 node = list(node)
 for i in range(len(node)):
