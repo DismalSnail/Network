@@ -61,42 +61,39 @@ def db_scan(min_pts=3, eps=650):
 
 
 if __name__ == "__main__":
-    lsit = db_scan()
-    for elem in lsit:
-        print(elem)
-# data = []
-# f = open("Csv/LocationList.csv", 'r')
-# reader = csv.reader(f)
-# for line in reader:
-#     if reader.line_num == 1:
-#         continue
-#     else:
-#         data.append([float(line[1]), float(line[2])])
-# data = np.array(data)
-# MinPts = 3
-# eps = 650
-#
-# db = DBSCAN(eps=eps, min_samples=MinPts, metric=haversine).fit(data)
-# core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
-# core_samples_mask[db.core_sample_indices_] = True
-# labels = db.labels_
-# n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
-#
-# unique_labels = set(labels)
-# # colors = ['r', 'b', 'g', 'y', 'c', 'm', 'orange']
-# c_map = plt.get_cmap('hsv')
-# colors = [c_map(i) for i in np.linspace(0.2, 0.8, n_clusters_ + 1)]
-# for k, col in zip(unique_labels, colors):
-#     if k == -1:
-#         col = '#000000'
-#     class_member_mask = (labels == k)
-#     xy = data[class_member_mask & core_samples_mask]
-#     plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=10)
-#
-#     xy = data[class_member_mask & ~core_samples_mask]
-#     if k == -1:
-#         plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=10)
-#     else:
-#         plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=3)
-# plt.title('Estimated number of clusters: %d' % n_clusters_)
-# plt.show()
+    data = []
+    f = open("Csv/LocationList.csv", 'r')
+    reader = csv.reader(f)
+    for line in reader:
+        if reader.line_num == 1:
+            continue
+        else:
+            data.append([float(line[1]), float(line[2])])
+    data = np.array(data)
+    MinPts = 3
+    eps = 650
+
+    db = DBSCAN(eps=eps, min_samples=MinPts, metric=haversine).fit(data)
+    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+    core_samples_mask[db.core_sample_indices_] = True
+    labels = db.labels_
+    n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+
+    unique_labels = set(labels)
+    # colors = ['r', 'b', 'g', 'y', 'c', 'm', 'orange']
+    c_map = plt.get_cmap('hsv')
+    colors = [c_map(i) for i in np.linspace(0.2, 0.8, n_clusters_ + 1)]
+    for k, col in zip(unique_labels, colors):
+        if k == -1:
+            col = '#000000'
+        class_member_mask = (labels == k)
+        xy = data[class_member_mask & core_samples_mask]
+        plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=10)
+
+        xy = data[class_member_mask & ~core_samples_mask]
+        if k == -1:
+            plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=10)
+        else:
+            plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=col, markeredgecolor='w', markersize=3)
+    plt.title('Estimated number of clusters: %d' % n_clusters_)
+    plt.show()

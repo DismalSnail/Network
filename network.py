@@ -8,9 +8,7 @@ import csv
 
 csvFile = open("Csv/TrainWeight.csv", "r")  # 读取文件
 csvreader = csv.reader(csvFile)
-
 edgeList = []  # 存储边的list
-
 for item in csvreader:
     middlelist = []
     if csvreader.line_num == 1:
@@ -20,10 +18,10 @@ for item in csvreader:
         middlelist.append(int(item[1]))
         middlelist.append(int(item[2]))
         edgeList.append(tuple(middlelist))
-
 csvFile.close()
 
 G = nx.Graph()
+
 G.add_weighted_edges_from(edgeList)
 
 nodeList = list(G.nodes())

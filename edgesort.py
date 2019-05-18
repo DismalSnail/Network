@@ -12,24 +12,18 @@ def take_third(elem):
     return elem[2].get('weight')
 
 
-def edges_sort(percentage=0.5, cluster=False, sal=False):
+def edges_sort(percentage=0.5, cluster=False):
     """返回删减后的节点
 
     :param percentage: 保留节点百分比
     :param cluster: 是否聚类，默认不使用
-    :param sal: 是否使用高显著性骨架，默认不使用
     :return: 删减后节点列表
     """
-    if sal:  # 骨架网络
-        with open("Csv/TrainSHH.csv", "r") as reader:
-            reader.readline()
-            csv_reader = csv.reader(reader)
-            edges = [tuple([int(item[0]), int(item[1]), float(item[2])]) for item in csv_reader]
-    else:  # 非骨架网络
-        with open("Csv/TrainWeight.csv", "r") as reader:
-            reader.readline()
-            csv_reader = csv.reader(reader)
-            edges = [tuple([int(item[0]), int(item[1]), int(item[2])]) for item in csv_reader]
+
+    with open("Csv/TrainSHH.csv", "r") as reader:
+        reader.readline()
+        csv_reader = csv.reader(reader)
+        edges = [tuple([int(item[0]), int(item[1]), float(item[2])]) for item in csv_reader]
 
     with open("Csv/LocationList.csv", "r") as reader:  # 节点信息
         reader.readline()
