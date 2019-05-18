@@ -30,6 +30,10 @@ def edges_sort(percentage=0.5, cluster=False):
         csv_reader = csv.reader(reader)
         nodes = [int(item[0]) for item in csv_reader]
 
+    alls=0.0
+    ps=0.0
+    for elem in edges:
+        alls=alls+elem[2]
     g = nx.Graph()
     g.add_weighted_edges_from(edges)
     g.add_nodes_from(nodes)
@@ -49,6 +53,7 @@ def edges_sort(percentage=0.5, cluster=False):
         while True:
             try:
                 line = weight_iter.__next__()  # 一条边
+                ps=ps+line[2]['weight']
                 start, end = line[0], line[1]
                 for e_list in db_list:
                     index = db_list.index(e_list)  # 聚类簇所在的索引
@@ -67,6 +72,7 @@ def edges_sort(percentage=0.5, cluster=False):
                     break
             except StopIteration:
                 break
+        print("聚类-边 重要性保留比例："+str(ps/alls))
         if flag:  # 所有聚类达到要求
             for elem in end_node_list:
                 end_node.update(elem)
@@ -98,8 +104,10 @@ def edges_sort(percentage=0.5, cluster=False):
         while end_node_num / init_node_num < percentage:
             try:
                 line = weight_iter.__next__()
+                ps=ps+line[2]['weight']
                 end_node.update([line[0], line[1]])
                 end_node_num = len(end_node)
             except StopIteration:
                 break
+        print("无聚类-边 重要性保留比例："+str(ps/alls))
         return end_node

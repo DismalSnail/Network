@@ -34,11 +34,15 @@ def nodes_sort(percentage=0.5, cluster=False):
     g.add_edges_from(edges)
     g.add_nodes_from(nodes)
     end_node = []  # 存储缩减后的节点
+    centrality = nx.eigenvector_centrality(g)
+    allc=0.0
+    pc=0.0
+    for v,c in centrality.items():
+        allc=allc+c
     if cluster:  # 使用聚类
         db_list = db.db_scan()
         noise = db_list.pop()  # 噪声点保留
         for e_list in db_list:  # 将每一个聚类进行缩减
-            centrality = nx.eigenvector_centrality(g)
             degree = [(n, centrality.get(n)) for n in e_list]
             init_node_num = len(degree)
             end_node_num = len(degree)
@@ -49,9 +53,13 @@ def nodes_sort(percentage=0.5, cluster=False):
                 if end_node_num == 1:  # 只有一个节点的聚类保留
                     break
             end_node = end_node + degree
+        for elem in end_node:
+             pc=elem[1]+pc
+        for elem in [centrality.get(n) for n in noise]:
+            pc=pc+elem
+        print("点-聚类 重要度保留比例："+str(pc/allc))
         return [elem[0] for elem in end_node] + noise
     else:  # 不使用聚类
-        centrality = nx.eigenvector_centrality(g)
         degree = [(v, value) for v, value in centrality.items()]
         init_node_num = len(degree)
         end_node_num = len(degree)
@@ -60,4 +68,7 @@ def nodes_sort(percentage=0.5, cluster=False):
             degree.pop()
             end_node_num = len(degree)
         end_node = [elem[0] for elem in degree]
+        for elem in [centrality.get(n) for n in end_node]:
+            pc=pc+elem
+        print("点-无聚类 重要度保留比例："+str(pc/allc))
         return end_node
