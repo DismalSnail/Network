@@ -45,7 +45,6 @@ def db_scan(min_pts=3, eps=650):
     labels = db.labels_
     s = db.labels_[db.labels_ == -1]
     s = s.tolist()
-    print(len(s))
     unique_labels = set(labels)
     label_list = []
     for k in unique_labels:

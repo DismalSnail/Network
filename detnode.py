@@ -62,6 +62,7 @@ with open("Csv/TrainSHH.csv", "r") as RouteCsvFile:
 # 骨干-聚类-中心性
 JsonFile.write("],\"cluster_centrality\":[")
 node = ns.nodes_sort(0.5, cluster=True)
+print(len(node))
 for i in range(len(node)):
     if i == len(node) - 1:
         JsonFile.write(str(node[i]))
@@ -70,6 +71,7 @@ for i in range(len(node)):
 # 骨干-非聚类-中心性
 JsonFile.write("],\"centrality\":[")
 node = ns.nodes_sort(0.5, cluster=False)
+print(len(node))
 for i in range(len(node)):
     if i == len(node) - 1:
         JsonFile.write(str(node[i]))
@@ -80,6 +82,7 @@ for i in range(len(node)):
 JsonFile.write("],\"cluster_salience\":[")
 node = es.edges_sort(0.5, cluster=True)
 node = list(node)
+print(len(node))
 for i in range(len(node)):
     if i == len(node) - 1:
         JsonFile.write(str(node[i]))
@@ -89,6 +92,7 @@ for i in range(len(node)):
 JsonFile.write("],\"salience\":[")
 node = es.edges_sort(0.5, cluster=False)
 node = list(node)
+print(len(node))
 for i in range(len(node)):
     if i == len(node) - 1:
         JsonFile.write(str(node[i]))
